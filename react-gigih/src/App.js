@@ -6,7 +6,7 @@ import { Album } from "./pages/home/album";
 function App() {
   return (
     <div className="App">
-      {/* <SearchPage></SearchPage> */}
+      <SearchPage></SearchPage>
       <Album></Album>
       {/* <div className="container">
         <div className="search">
