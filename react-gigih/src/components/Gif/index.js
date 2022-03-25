@@ -3,7 +3,7 @@ const Gif = ({ title, url }) => {
     <>
       <div>
         <h3>{title}</h3>
-        <img src={url}></img>
+        <img src={url} alt={title}></img>
       </div>
     </>
   );

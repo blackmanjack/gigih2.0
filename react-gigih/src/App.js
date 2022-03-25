@@ -1,20 +1,13 @@
-import logo from "./logo.svg";
 import "./App.css";
 import SearchPage from "./pages/home";
-import { Album } from "./pages/home/album";
+import Song from "./pages/home/song";
 
 function App() {
   return (
     <div className="App">
       <SearchPage></SearchPage>
-      <Album></Album>
-      {/* <div className="container">
-        <div className="search">
-          <input type="search"></input>
-          <button id="btn-seacrh">search</button>
-        </div>
-        <img src="https://media.giphy.com/media/Vh8pbGX3SGRwFDh3V0/source.gif"></img>
-      </div> */}
+      <Song></Song>
+
       {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
