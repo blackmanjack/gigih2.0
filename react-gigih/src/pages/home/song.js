@@ -1,18 +1,18 @@
 import Track from "../../components/Track";
 import { ConvertMin, ConvertSec } from "../../helper/ConvertMiliseconds";
-import data from "./data";
-console.log(data.album.images[0]);
+import { dataAlbum } from "./data";
+console.log(dataAlbum.album.images[0]);
 const Song = () => {
-  let duration_s = ConvertSec(data.duration_ms);
-  let duration_m = ConvertMin(data.duration_ms);
-  console.log(data.artists);
+  let duration_s = ConvertSec(dataAlbum.duration_ms);
+  let duration_m = ConvertMin(dataAlbum.duration_ms);
+  console.log(dataAlbum.artists);
   return (
     <>
       <Track
-        imageURL={data.album.images[0].url}
-        album={data.album.name}
-        title={data.name}
-        artist={data.artists[0].name}
+        imageURL={dataAlbum.album.images[0].url}
+        album={dataAlbum.album.name}
+        title={dataAlbum.name}
+        artist={dataAlbum.artists[0].name}
         min={duration_m}
         sec={duration_s}
       ></Track>

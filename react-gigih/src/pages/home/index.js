@@ -1,20 +1,26 @@
 import Gif from "../../components/Gif";
 import SearchBar from "../../components/Search";
+import { dataGif } from "./data";
+import { useState } from "react";
+import FilterCategory from "../../components/Filter";
 
 const SearchPage = () => {
-  const gif = {
-    id: "4HrBfVJJveBNS9ytSk",
-    title: "Nintendo Plotting GIF by Gaming GIFs",
-    uploadedDate: "2018-04-03 15:21:50",
-    url: "https://media4.giphy.com/media/4HrBfVJJveBNS9ytSk/200w.gif?cid=cb3f2bebpuo6jj0g5f9gfibjre2zzbb4yb1cfshtplanlrpw&rid=200w.gif&ct=g",
-    webp: "https://media4.giphy.com/media/4HrBfVJJveBNS9ytSk/giphy.webp?cid=cb3f2bebpuo6jj0g5f9gfibjre2zzbb4yb1cfshtplanlrpw&rid=giphy.webp&ct=g",
-  };
+  const [filter, setFilter] = useState("");
 
+  const filterData = dataGif.filter((data) => data.rating === filter);
+
+  console.log(filterData, "data g");
+  console.log("dataGIF", dataGif);
   return (
     <>
       <div className="container">
         <SearchBar></SearchBar>
-        <Gif title={gif.title} url={gif.url}></Gif>
+        <FilterCategory></FilterCategory>
+        <div className="list-item">
+          {dataGif.map((data) => (
+            <Gif key={data.id} {...data} />
+          ))}
+        </div>
       </div>
     </>
   );

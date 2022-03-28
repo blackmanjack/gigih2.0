@@ -6,7 +6,7 @@ function App() {
   return (
     <div className="App">
       <SearchPage></SearchPage>
-      <Song></Song>
+      {/* <Song></Song> */}
 
       {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
