@@ -66,17 +66,23 @@ h1 {
   font-size: 16px;
 }
 h2 {
-  font-size: 14px;
+  font-size: 12px;
 }
 .text {
+  margin-left: 4px;
+  margin-right: 4px;
   padding: 0px 4px;
   margin-bottom: 10px;
 }
 .list-item {
   display: flex;
   align-items: center;
-  height: 100vh;
+  /* height: 10vh; */
   justify-content: center;
   flex-direction: row;
   flex-wrap: wrap;
+  gap: -23px;
+}
+.page-container {
+  margin: 0 20px;
 }
