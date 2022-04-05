@@ -1,4 +1,11 @@
 body {
+  /* display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center; */
+  /* border: 1px solid red; */
   background-color: #121212;
   color: white;
   margin: 0;
@@ -25,6 +32,7 @@ input {
   /* background-color: black; */
 }
 .container {
+  border: 1px solid green;
   padding: 50px;
   display: flex;
   flex-direction: column;
@@ -95,4 +103,16 @@ h2 {
 }
 .page-container {
   margin: 20px 20px;
+}
+.login-page {
+  min-height: 80vh;
+  width: 20%;
+  /* padding: 10px; */
+  margin: 0 auto;
+  border: 3px solid red;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }

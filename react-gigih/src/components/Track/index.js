@@ -1,4 +1,35 @@
-const Track = ({ imageURL, album, title, artist, min, sec }) => {
+import { useState } from "react";
+
+const Track = ({
+  playlist,
+  handleSelect,
+  uri,
+  imageURL,
+  album,
+  title,
+  artist,
+  min,
+  sec,
+}) => {
+  // const [select, setSelect] = useState(false);
+  // const [songSelect, setSongSelect] = useState([]);
+
+  // const handleSelect = (idd) => {
+  //   // event.preventDefault();
+  //   console.log("select", idd);
+  //   setSelect((select)=>{
+  //     if(select == false) {
+  //       setSelect(true)
+
+  //     }
+  //   })
+  //   // setSelect(true);
+  //   // if (select === true) {
+  //   //   songSelect.push(...Track(idd));
+  //   //   console.log(songSelect, "ini array apa");
+  //   // }
+  // };
+
   return (
     <>
       <div className="container">
@@ -9,7 +40,9 @@ const Track = ({ imageURL, album, title, artist, min, sec }) => {
             <p>{artist}</p>
             <p>{`${min} min ${sec} sec`}</p>
             <h2>{album}</h2>
-            {/* <button>select</button> */}
+            <button onClick={() => handleSelect(uri)}>
+              {playlist.includes(uri) ? "Deselect" : "Select"}
+            </button>
           </div>
         </div>
       </div>
