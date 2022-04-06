@@ -1,47 +1,21 @@
 import { useState } from "react";
+import { ConvertMin, ConvertSec } from "../../helper/ConvertMiliseconds";
 
-const Track = ({
-  playlist,
-  handleSelect,
-  uri,
-  imageURL,
-  album,
-  title,
-  artist,
-  min,
-  sec,
-}) => {
-  // const [select, setSelect] = useState(false);
-  // const [songSelect, setSongSelect] = useState([]);
-
-  // const handleSelect = (idd) => {
-  //   // event.preventDefault();
-  //   console.log("select", idd);
-  //   setSelect((select)=>{
-  //     if(select == false) {
-  //       setSelect(true)
-
-  //     }
-  //   })
-  //   // setSelect(true);
-  //   // if (select === true) {
-  //   //   songSelect.push(...Track(idd));
-  //   //   console.log(songSelect, "ini array apa");
-  //   // }
-  // };
-
+const Track = ({ handleSelect, playlist, ...item }) => {
   return (
     <>
       <div className="container">
         <div className="card-album">
-          <img src={imageURL} alt={album}></img>
+          <img src={item.album.images[0].url} alt={item.album.name}></img>
           <div id="text">
-            <h1>{title}</h1>
-            <p>{artist}</p>
-            <p>{`${min} min ${sec} sec`}</p>
-            <h2>{album}</h2>
-            <button onClick={() => handleSelect(uri)}>
-              {playlist.includes(uri) ? "Deselect" : "Select"}
+            <h1>{item.name}</h1>
+            <p>{item.artists[0].name}</p>
+            <p>{`${ConvertMin(item.duration_ms)} min ${ConvertSec(
+              item.duration_ms
+            )} sec`}</p>
+            <h2>{item.album.name}</h2>
+            <button onClick={() => handleSelect(item.uri)}>
+              {playlist.includes(item.uri) ? "Deselect" : "Select"}
             </button>
           </div>
         </div>

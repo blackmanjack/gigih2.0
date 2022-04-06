@@ -1,6 +1,5 @@
 // import data from "./data";
 import Track from "../../components/Track";
-import { ConvertMin, ConvertSec } from "../../helper/ConvertMiliseconds";
 import SearchBar from "../../components/Search";
 import { useState, useEffect } from "react";
 
@@ -15,7 +14,6 @@ const ListTrack = () => {
   const [data, setData] = useState([]);
   const [search, setSearch] = useState("");
   const [limit, setLimit] = useState(10);
-  const [select, setSelect] = useState(false);
   const [playlist, setPlaylist] = useState([]);
 
   const handleLogin = () => {
@@ -103,19 +101,23 @@ const ListTrack = () => {
               </select>
             </div>
 
+            <div className="list-playlist">
+              <p></p>
+            </div>
             <div className="list-item">
               {data.map((item) => (
                 <Track
                   key={item.id}
-                  uri={item.uri}
-                  imageURL={item.album.images[0].url}
-                  album={item.album.name}
-                  title={item.name}
-                  artist={item.artists[0].name}
-                  min={ConvertMin(item.duration_ms)}
-                  sec={ConvertSec(item.duration_ms)}
+                  // uri={item.uri}
+                  // imageURL={item.album.images[0].url}
+                  // album={item.album.name}
+                  // title={item.name}
+                  // artist={item.artists[0].name}
+                  // min={ConvertMin(item.duration_ms)}
+                  // sec={ConvertSec(item.duration_ms)}
                   handleSelect={handleSelect}
                   playlist={playlist}
+                  {...item}
                 ></Track>
               ))}
             </div>
