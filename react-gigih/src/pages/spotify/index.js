@@ -62,22 +62,19 @@ const ListTrack = () => {
   };
 
   const handleSelect = (data) => {
-    // console.log(playlist.includes(data), "playlist");
-    if (playlist.includes(data)) {
-      const findIndex = playlist.findIndex((i) => i === data);
-      setPlaylist((prevData) => {
-        const newArr = [
-          ...prevData.slice(0, findIndex),
-          ...prevData.slice(findIndex + 1, prevData.length),
-        ];
-        return newArr;
-      });
-    } else {
+    //if data in playlist === false
+    //add new data to playlist
+    if (playlist.some((item) => data.name === item.name) === false) {
       setPlaylist((prevData) => {
         const newA = [...prevData, data];
         return newA;
-        // console.log(newA, "test");
       });
+    }
+    //if data is already in playlist
+    //erase data from list
+    else {
+      let newArray = playlist.filter((item) => item.id !== data.id);
+      setPlaylist(newArray);
     }
   };
   console.log(playlist, "playlist");
@@ -108,13 +105,6 @@ const ListTrack = () => {
               {data.map((item) => (
                 <Track
                   key={item.id}
-                  // uri={item.uri}
-                  // imageURL={item.album.images[0].url}
-                  // album={item.album.name}
-                  // title={item.name}
-                  // artist={item.artists[0].name}
-                  // min={ConvertMin(item.duration_ms)}
-                  // sec={ConvertSec(item.duration_ms)}
                   handleSelect={handleSelect}
                   playlist={playlist}
                   {...item}

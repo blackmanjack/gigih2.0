@@ -14,8 +14,12 @@ const Track = ({ handleSelect, playlist, ...item }) => {
               item.duration_ms
             )} sec`}</p>
             <h2>{item.album.name}</h2>
-            <button onClick={() => handleSelect(item.uri)}>
-              {playlist.includes(item.uri) ? "Deselect" : "Select"}
+            <button onClick={() => handleSelect(item)}>
+              {/* {playlist.includes(item) ? "Deselect" : "Select"} */}
+              {/* {playlist.includes(item) ? "Deselect" : "Select"} */}
+              {playlist.some((data) => item.name === data.name)
+                ? "Deselect"
+                : "Select"}
             </button>
           </div>
         </div>
