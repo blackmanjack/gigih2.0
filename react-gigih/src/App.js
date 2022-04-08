@@ -8,7 +8,7 @@ function App() {
     <div className="App">
       {/* <SearchPage></SearchPage> */}
       {/* <Song></Song> */}
-      <ListTrack></ListTrack>
+      <ListTrack className="layout"></ListTrack>
     </div>
   );
 }

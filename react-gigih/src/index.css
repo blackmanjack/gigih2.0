@@ -60,7 +60,7 @@ input {
   background-image: none;
   border: none;
 }
-img {
+.card-album img {
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
   /* position: absolute; */
@@ -115,4 +115,32 @@ h2 {
   justify-content: center;
   align-items: center;
   text-align: center;
+}
+.list-playlist {
+  border: 1px solid red;
+  justify-content: left;
+  /* align-items: center; */
+  display: flex;
+  flex-direction: column;
+}
+.card-playlist > div {
+  margin: 6px;
+}
+.img-playlist {
+  width: 50px;
+  height: 50px;
+}
+.playlist button {
+  flex-direction: column;
+  justify-content: center;
+  height: fit-content;
+}
+.layout {
+  margin: 0 100px;
+}
+.card-playlist {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: left;
 }
