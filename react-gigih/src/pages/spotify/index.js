@@ -1,17 +1,21 @@
 // import data from "./data";
-import axios, { Axios } from "axios";
+import axios from "axios";
 import Track from "../../components/Track";
 import SearchBar from "../../components/Search";
 import { useState, useEffect } from "react";
 import Playlist from "../../components/playlist";
+import { useSelector, useDispatch } from "react-redux";
+import { setToken } from "../../utils/tokenSlice";
 
 const ListTrack = () => {
-  const [token, setToken] = useState(
-    window.location.hash
-      .substring(1, window.location.hash.length - 1)
-      .split("&")[0]
-      .split("=")[1]
-  );
+  const dispatch = useDispatch();
+  const token = useSelector((state) => state.auth.token);
+  // const [token, setToken] = useState(
+  //   window.location.hash
+  //     .substring(1, window.location.hash.length - 1)
+  //     .split("&")[0]
+  //     .split("=")[1]
+  // );
   const [playlistName, setPlaylistName] = useState("");
   const [descPlaylist, setDescPlaylist] = useState("");
   const [user, setUser] = useState("");
@@ -25,7 +29,7 @@ const ListTrack = () => {
   const handleLogin = () => {
     //console.log(process.env.REACT_APP_SPOTIFY_CLIENT_ID, "clientID");
     window.open(
-      `https://accounts.spotify.com/authorize?client_id=e76238c1f3c946448d99a02416d2586a&scope=playlist-modify-private&response_type=token&redirect_uri=http://localhost:3000`
+      `https://accounts.spotify.com/authorize?client_id=e76238c1f3c946448d99a02416d2586a&scope=user-read-email playlist-modify-private playlist-read-private&response_type=token&redirect_uri=http://localhost:3000`
     );
   };
 
@@ -160,7 +164,7 @@ const ListTrack = () => {
 
   const handleLogOut = () => {
     console.log("LogOut");
-    setToken(undefined);
+    dispatch(setToken(undefined));
   };
   // console.log(listUserPlaylist, "Myplaylist");
   // console.log(token, "token");
