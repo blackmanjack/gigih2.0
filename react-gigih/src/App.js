@@ -1,9 +1,7 @@
 import "./App.css";
-import SearchPage from "./pages/home";
-import Song from "./pages/home/song";
 import ListTrack from "./pages/spotify";
 import { Provider } from "react-redux";
-import store from "./utils/store";
+import store from "./utils/redux/store";
 
 function App() {
   return (

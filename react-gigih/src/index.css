@@ -32,7 +32,7 @@ input {
   /* background-color: black; */
 }
 .container {
-  border: 1px solid green;
+  /* border: 1px solid green; */
   padding: 50px;
   display: flex;
   flex-direction: column;
@@ -109,7 +109,7 @@ h2 {
   width: 20%;
   /* padding: 10px; */
   margin: 0 auto;
-  border: 3px solid red;
+  /* border: 3px solid red; */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -117,7 +117,7 @@ h2 {
   text-align: center;
 }
 .list-playlist {
-  border: 1px solid red;
+  /* border: 1px solid red; */
   justify-content: left;
   /* align-items: center; */
   display: flex;

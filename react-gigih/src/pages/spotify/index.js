@@ -5,7 +5,8 @@ import SearchBar from "../../components/Search";
 import { useState, useEffect } from "react";
 import Playlist from "../../components/playlist";
 import { useSelector, useDispatch } from "react-redux";
-import { setToken } from "../../utils/tokenSlice";
+import { setToken } from "../../utils/redux/tokenSlice";
+import Filter from "../../components/filter";
 
 const ListTrack = () => {
   const dispatch = useDispatch();
@@ -18,6 +19,7 @@ const ListTrack = () => {
   // );
   const [playlistName, setPlaylistName] = useState("");
   const [descPlaylist, setDescPlaylist] = useState("");
+  const [form, setForm] = useState({});
   const [user, setUser] = useState("");
   const [userID, setUserID] = useState("");
   const [data, setData] = useState([]);
@@ -45,6 +47,14 @@ const ListTrack = () => {
   const handleChangeDescPlaylist = (e) => {
     // console.log(e.target.value);
     setDescPlaylist(e.target.value);
+  };
+
+  const handleInputForm = (e) => {
+    const { name, value } = e.target;
+    // console.log(name, "nameForm");
+    // console.log(value, "valueForm");
+    setForm({ ...form, [name]: value });
+    console.log(form, "form");
   };
 
   const handleOption = (e) => {
@@ -80,22 +90,26 @@ const ListTrack = () => {
       });
   };
 
-  const addPlaylist = async () => {
+  const addPlaylist = async (data) => {
+    // console.log(form, "form");
+    // console.log(formData, "formData");
     await axios
       .post(
         `https://api.spotify.com/v1/users/${userID}/playlists?access_token=${token}`,
         {
-          name: playlistName,
-          description: descPlaylist,
+          ...data,
+          // name: playlistName,
+          // description: descPlaylist,
           public: false,
         }
       )
       .then(
         (res) =>
           //console.log(res.data.id, "playlist id")
-          addTracktoPlaylist(res.data.id)
-
-        // addTracktoPlaylist(idPlaylist)
+          addTracktoPlaylist(res.data.id),
+        setPlaylist([]),
+        setListUri([]),
+        setForm({})
       )
       .catch((err) => err.message);
   };
@@ -110,26 +124,22 @@ const ListTrack = () => {
   };
 
   useEffect(() => {
-    addPlaylist();
-  }, []);
-
-  useEffect(() => {
-    // getAuthKey();
-    getData();
+    if (search !== "") {
+      getData();
+    }
     getProfile();
   }, [limit, search]);
 
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   // getData();
-  //   // addPlaylist();
-  // };
+  const handleSubmitForm = (e) => {
+    e.preventDefault();
+    addPlaylist(form);
+  };
 
   const handleSelect = (data, uri) => {
     // console.log(uri, "selected uri");
     //if data in playlist === false
     //add new data to playlist
-    if (playlist.some((item) => data.name === item.name) === false) {
+    if (playlist.some((item) => data.id === item.id) === false) {
       setListUri((prevUri) => [...prevUri, uri]);
       setPlaylist((prevData) => {
         const newA = [...prevData, data];
@@ -146,28 +156,10 @@ const ListTrack = () => {
     }
   };
 
-  // const getUserPlaylist = async () => {
-  //   await axios.get(
-  //     `https://api.spotify.com/v1/me/playlists?access_token=${token}`
-  //   );
-  //   // .then((res) => console.log(res.data.items, "playlist aing"));
-  // };
-  // useEffect(() => {
-  //   if (token) {
-  //     getUserPlaylist();
-  //   }
-  // }, [token]);
-  // console.log(playlistName, descPlaylist);
-  // console.log(playlist, "playlist");
-  // console.log("LIST URI", listUri);
-  // console.log(userID);
-
   const handleLogOut = () => {
     console.log("LogOut");
     dispatch(setToken(undefined));
   };
-  // console.log(listUserPlaylist, "Myplaylist");
-  // console.log(token, "token");
   return (
     <>
       <div className="page-container">
@@ -181,34 +173,28 @@ const ListTrack = () => {
               handleChange={handleChange}
             />
 
-            <div className="limit-box">
-              <p>Limit</p>
-              <select value={limit} onChange={handleOption}>
-                <option>10</option>
-                <option>15</option>
-                <option>20</option>
-                <option>30</option>
-              </select>
-            </div>
+            <Filter limit={limit} handleChange={handleOption} />
 
             <div className="layout playlist">
-              <form onSubmit={() => addPlaylist()}>
-                <label htmlFor="playlistName"></label>
+              <form onSubmit={handleSubmitForm}>
+                <label htmlFor="name"></label>
                 <input
-                  id="playlistName"
+                  id="name"
+                  name="name"
                   type="text"
-                  value={playlistName}
-                  onChange={handleChangePlaylist}
+                  // value={playlistName}
+                  onChange={handleInputForm}
                   placeholder="Your Playlist Name"
                   minLength="10"
                 ></input>
-                <label htmlFor="descPlaylist"></label>
+                <label htmlFor="description"></label>
                 <input
-                  id="descPlaylist"
+                  id="description"
+                  name="description"
                   type="text"
-                  value={descPlaylist}
-                  onChange={handleChangeDescPlaylist}
-                  placeholder="Description Playlist"
+                  // value={descPlaylist}
+                  onChange={handleInputForm}
+                  placeholder="Your Description"
                 ></input>
                 <button>submit</button>
               </form>
@@ -216,7 +202,6 @@ const ListTrack = () => {
                 {playlist.map((item, index) => (
                   <Playlist key={item.id} index={index} {...item} />
                 ))}
-                {}
               </div>
             </div>
 
@@ -225,6 +210,7 @@ const ListTrack = () => {
                 <Track
                   key={item.id}
                   handleSelect={handleSelect}
+                  // listUri={listUri}
                   playlist={playlist}
                   {...item}
                 ></Track>

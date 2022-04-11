@@ -1,4 +1,4 @@
-import { ConvertMin, ConvertSec } from "../../helper/ConvertMiliseconds";
+import { ConvertMin, ConvertSec } from "../../utils/helper/ConvertMiliseconds";
 const Playlist = ({ index, ...item }) => {
   return (
     <>
@@ -21,9 +21,7 @@ const Playlist = ({ index, ...item }) => {
             item.duration_ms
           )}`}</p>
         </div>
-        <div>
-          <button>select</button>
-        </div>
+        <div>{/* <button onClick={handleSelect()}>delte</button> */}</div>
       </div>
     </>
   );

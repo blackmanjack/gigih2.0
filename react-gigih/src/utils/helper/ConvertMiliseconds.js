@@ -1,8 +1,9 @@
 const ConvertSec = (miliseconds) => {
   let duration_s = miliseconds / 1000;
   let sec = parseInt(duration_s % 60);
-
-  return sec;
+  if (sec < 10) {
+    return `0` + sec;
+  } else return sec;
 };
 
 const ConvertMin = (miliseconds) => {
