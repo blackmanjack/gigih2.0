@@ -8,7 +8,7 @@ const SearchBar = ({ user, query, handleChange }) => {
           onChange={handleChange}
           placeholder="Search Song"
         ></input>
-        <p>{user}</p>
+        {/* <p>{user}</p> */}
         {/* <button id="btn-seacrh" onClick={handleSubmit}>
           search
         </button> */}

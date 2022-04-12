@@ -1,29 +1,69 @@
-// import Gif from "../../components/Gif";
-// import SearchBar from "../../components/Search";
-// import { dataGif } from "./data";
-// import { useState } from "react";
-// import FilterCategory from "../../components/Filter";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { useSelector } from "react-redux";
+import { ConvertString20 } from "../../utils/helper/ConvertString";
+// import Track from "../../components/Track";
 
-// const SearchPage = () => {
-//   const [filter, setFilter] = useState("");
+const Home = () => {
+  const [data, setData] = useState([]);
+  // const dispatch = useDispatch();
+  const token = useSelector((state) => state.auth.token);
 
-//   const filterData = dataGif.filter((data) => data.rating === filter);
+  const getNewRelease = () => {
+    axios
+      .get(
+        `https://api.spotify.com/v1/browse/new-releases?access_token=${token}`,
+        {
+          // headers: { Authorization: `Bearer ${token}` },
+        }
+      )
+      .then((res) => {
+        // console.log(res.data.albums.items);
+        setData(res.data.albums.items);
+      });
+  };
 
-//   console.log(filterData, "data g");
-//   console.log("dataGIF", dataGif);
-//   return (
-//     <>
-//       <div className="container">
-//         <SearchBar></SearchBar>
-//         <FilterCategory></FilterCategory>
-//         <div className="list-item">
-//           {dataGif.map((data) => (
-//             <Gif key={data.id} {...data} />
-//           ))}
-//         </div>
-//       </div>
-//     </>
-//   );
-// };
+  useEffect(() => {
+    if (data.length === 0) {
+      getNewRelease();
+    }
+    console.log(data, "data");
+  }, [data]);
 
-// export default SearchPage;
+  return (
+    <>
+      <div className="container">
+        <h1>New Release</h1>
+        {data.length !== 0 && (
+          <div className="list-release">
+            {data.map((item) => (
+              <div key={item.id} className="card-release">
+                <img src={item.images[0].url}></img>
+                <div className="text-card">
+                  <div>
+                    <p className="item-name">{ConvertString20(item.name)}</p>
+                  </div>
+                  <div>
+                    <p className="artist-name">{item.artists[0].name}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* {data.map((item) => (
+          <Track
+            key={item.id}
+            handleSelect={handleSelect}
+            // listUri={listUri}
+            playlist={playlist}
+            {...item}
+          ></Track>
+        ))} */}
+      </div>
+    </>
+  );
+};
+
+export default Home;

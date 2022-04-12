@@ -7,18 +7,11 @@ import Playlist from "../../components/playlist";
 import { useSelector, useDispatch } from "react-redux";
 import { setToken } from "../../utils/redux/tokenSlice";
 import Filter from "../../components/filter";
+import Loginpage from "../Login";
 
 const ListTrack = () => {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
-  // const [token, setToken] = useState(
-  //   window.location.hash
-  //     .substring(1, window.location.hash.length - 1)
-  //     .split("&")[0]
-  //     .split("=")[1]
-  // );
-  const [playlistName, setPlaylistName] = useState("");
-  const [descPlaylist, setDescPlaylist] = useState("");
   const [form, setForm] = useState({});
   const [user, setUser] = useState("");
   const [userID, setUserID] = useState("");
@@ -28,25 +21,8 @@ const ListTrack = () => {
   const [playlist, setPlaylist] = useState([]);
   const [listUri, setListUri] = useState([]);
 
-  const handleLogin = () => {
-    //console.log(process.env.REACT_APP_SPOTIFY_CLIENT_ID, "clientID");
-    window.open(
-      `https://accounts.spotify.com/authorize?client_id=e76238c1f3c946448d99a02416d2586a&scope=user-read-email playlist-modify-private playlist-read-private&response_type=token&redirect_uri=http://localhost:3000`
-    );
-  };
-
   const handleChange = (e) => {
     setSearch(e.target.value);
-  };
-
-  const handleChangePlaylist = (e) => {
-    // console.log(e.target.value);
-    setPlaylistName(e.target.value);
-  };
-
-  const handleChangeDescPlaylist = (e) => {
-    // console.log(e.target.value);
-    setDescPlaylist(e.target.value);
   };
 
   const handleInputForm = (e) => {
@@ -72,7 +48,7 @@ const ListTrack = () => {
     )
       .then((res) => res.json())
       .then((data) => {
-        // console.log(data);
+        console.log(data);
         setData(data.tracks.items);
       })
       .catch((error) => error.message);
@@ -165,7 +141,7 @@ const ListTrack = () => {
       <div className="page-container">
         {token !== undefined ? (
           <>
-            <button onClick={() => handleLogOut()}>LogOut</button>
+            {/* <button onClick={() => handleLogOut()}>LogOut</button> */}
             <SearchBar
               query={search}
               user={user}
@@ -219,12 +195,7 @@ const ListTrack = () => {
           </>
         ) : (
           <>
-            <div className="container">
-              <div className="login-page">
-                <h1>Hello, Stranger</h1>
-                <button onClick={() => handleLogin()}>Login</button>
-              </div>
-            </div>
+            <Loginpage />
           </>
         )}
       </div>
