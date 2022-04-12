@@ -35,8 +35,10 @@ const Home = () => {
       <div className="container">
         <h1>New Release</h1>
         {data.length !== 0 && (
+          //flexbox
           <div className="list-release">
             {data.map((item) => (
+              //grid
               <div key={item.id} className="card-release">
                 <img src={item.images[0].url}></img>
                 <div className="text-card">
