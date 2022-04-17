@@ -183,3 +183,12 @@ h2 {
   font-weight: bold;
   /* border: 1px solid blue; */
 }
+.bg-white {
+  background-color: white;
+}
+.form {
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}

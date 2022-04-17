@@ -1,3 +1,4 @@
+import { Button } from "@mui/material";
 import { ConvertMin, ConvertSec } from "../../utils/helper/ConvertMiliseconds";
 
 const Track = ({ handleSelect, playlist, ...item }) => {
@@ -13,11 +14,14 @@ const Track = ({ handleSelect, playlist, ...item }) => {
               item.duration_ms
             )} sec`}</p>
             <h2>{item.album.name}</h2>
-            <button onClick={() => handleSelect(item, item.uri)}>
+            <Button
+              variant="contained"
+              onClick={() => handleSelect(item, item.uri)}
+            >
               {playlist.some((data) => item.id === data.id)
                 ? "Deselect"
                 : "Select"}
-            </button>
+            </Button>
           </div>
         </div>
       </div>

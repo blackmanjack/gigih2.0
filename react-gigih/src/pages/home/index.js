@@ -2,20 +2,15 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { ConvertString20 } from "../../utils/helper/ConvertString";
-// import Track from "../../components/Track";
 
 const Home = () => {
   const [data, setData] = useState([]);
-  // const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
 
   const getNewRelease = () => {
     axios
       .get(
-        `https://api.spotify.com/v1/browse/new-releases?access_token=${token}`,
-        {
-          // headers: { Authorization: `Bearer ${token}` },
-        }
+        `https://api.spotify.com/v1/browse/new-releases?access_token=${token}`
       )
       .then((res) => {
         // console.log(res.data.albums.items);
@@ -53,16 +48,6 @@ const Home = () => {
             ))}
           </div>
         )}
-
-        {/* {data.map((item) => (
-          <Track
-            key={item.id}
-            handleSelect={handleSelect}
-            // listUri={listUri}
-            playlist={playlist}
-            {...item}
-          ></Track>
-        ))} */}
       </div>
     </>
   );
