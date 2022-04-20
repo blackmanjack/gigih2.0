@@ -5,7 +5,6 @@ import { useSelector, useDispatch } from "react-redux";
 import Loginpage from "../pages/Login";
 import { Switch } from "react-router-dom";
 import { Redirect } from "react-router-dom";
-import PlaylistPage from "../pages/playlist";
 import { setToken } from "../utils/redux/tokenSlice";
 
 const SwitchRouter = () => {

@@ -22,7 +22,7 @@ const Home = () => {
     if (data.length === 0) {
       getNewRelease();
     }
-    console.log(data, "data");
+    // console.log(data, "data");
   }, [data]);
 
   return (

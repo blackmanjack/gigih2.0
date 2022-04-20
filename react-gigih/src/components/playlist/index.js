@@ -1,9 +1,13 @@
 import { ConvertMin, ConvertSec } from "../../utils/helper/ConvertMiliseconds";
-const Playlist = ({ index, ...item }) => {
+import {
+  ConvertString20,
+  ConvertString40,
+} from "../../utils/helper/ConvertString";
+const Playlist = ({ index, handleSelect, playlist, ...item }) => {
   return (
     <>
       <div className="card-playlist">
-        <div>
+        <div className="number">
           <p>{index + 1}</p>
         </div>
         <div>
@@ -13,15 +17,22 @@ const Playlist = ({ index, ...item }) => {
             alt={item.album.name}
           ></img>
         </div>
-        <div>
-          <p>{item.name}</p>
+        <div className="title-album">
+          <p>{ConvertString40(item.name)}</p>
+          <p>{ConvertString40(item.artists[0].name)}</p>
         </div>
-        <div>
+        <div className="duration">
           <p>{`${ConvertMin(item.duration_ms)}:${ConvertSec(
             item.duration_ms
           )}`}</p>
         </div>
-        <div>{/* <button onClick={handleSelect()}>delte</button> */}</div>
+        <div className="button-playlist">
+          <button onClick={() => handleSelect(item, item.uri)}>
+            {playlist.some((data) => item.id === data.id)
+              ? "Deselect"
+              : "Select"}
+          </button>
+        </div>
       </div>
     </>
   );
