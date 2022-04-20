@@ -1,0 +1,230 @@
+body {
+  /* display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center; */
+  /* border: 1px solid red; */
+  background-color: #191414;
+  color: white;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+.filter-container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: left;
+}
+input {
+  padding: 5px;
+  border: 1px solid rgb(216, 216, 216);
+  border-radius: 8px;
+  /* background-color: black; */
+}
+.container {
+  /* border: 1px solid green; */
+  margin: 0 110px;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+}
+.search {
+  text-align: center;
+  flex-direction: row;
+}
+.card-album {
+  /* position: relative; */
+  /* background-image: url(https://i.scdn.co/image/ab67616d0000b273e8b066f70c206551210d902b); */
+  color: black;
+  background-color: rgb(224, 224, 224);
+  margin: 0 auto;
+  border-radius: 10px;
+  /* border: 1px solid red; */
+  padding: 8px;
+  min-height: 100%;
+  width: 200px;
+  transition: all 0.5s;
+}
+.card-album:hover {
+  transform: scale(1.05);
+  background-color: #ff99ee;
+  background-image: none;
+  border: none;
+}
+.card-album img {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  /* position: absolute; */
+  /* top: -10px; */
+  width: 100%;
+  height: 50%;
+  /* margin: 20px auto; */
+  /* position: absolute;
+  top: 20%;
+  left: 35%; */
+}
+h1 {
+  font-size: 16px;
+}
+h2 {
+  font-size: 12px;
+}
+#text {
+  display: grid;
+  column-gap: -15px;
+  /* flex-wrap: wrap; */
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  /* border: 1px solid red; */
+  /* height: 50%; */
+  margin-left: 4px;
+  margin-right: 4px;
+  /* padding: 0px 4px; */
+  /* margin-bottom: 10px; */
+}
+.list-item {
+  display: flex;
+  align-items: center;
+  /* height: 10vh; */
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  /* gap: -23px; */
+}
+.page-container {
+  background-color: #5c4959;
+  margin: 20px 20px;
+}
+.login-page {
+  min-height: 80vh;
+  width: 20%;
+  /* padding: 10px; */
+  margin: 0 auto;
+  /* border: 3px solid red; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.list-playlist {
+  /* border: 1px solid red; */
+  justify-content: left;
+  /* align-items: center; */
+  display: flex;
+  flex-direction: column;
+}
+.card-playlist > div {
+  margin: 6px;
+}
+.img-playlist {
+  width: 50px;
+  height: 50px;
+}
+.playlist button {
+  flex-direction: column;
+  justify-content: center;
+  height: fit-content;
+}
+.layout {
+  display: flex;
+  flex-direction: column;
+  margin: 0 100px;
+}
+.wrapper-content {
+  display: flex;
+  flex-direction: row;
+  /* margin: 0 100px; */
+}
+.layout-item {
+  border: 1px solid red;
+  flex: 1;
+}
+.card-playlist {
+  border: 1px solid green;
+  display: grid;
+  /* grid-template: auto 1fr auto / auto 1fr auto; */
+  grid-template-columns: 5% 10% 60% 10% 10%;
+  /* grid-template-rows: 50% 20%; */
+  /* grid-row: 1 / 4; */
+  /* display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: left; */
+}
+.title-album {
+  background-color: #3f313d;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+}
+.title-album p {
+  border: 1px solid blue;
+  /* gap: -1px; */
+  margin-top: -10px;
+}
+.list-release {
+  /* border: 1px solid green; */
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+.card-release {
+  /* border: 1px solid red; */
+  height: 280px;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: rgb(31, 31, 31);
+  display: grid;
+}
+.card-release:hover {
+  background-color: #3e3e3e;
+}
+.card-release img {
+  width: 200px;
+  border-radius: 8px;
+}
+.text-card {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+.text-card div {
+  margin: -15px 0;
+}
+.artist-name {
+  color: #c3c3c3;
+  /* border: 1px solid yellow; */
+}
+.item-name {
+  font-weight: bold;
+  /* border: 1px solid blue; */
+}
+.bg-white {
+  background-color: white;
+}
+.form {
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.btn-loadMore {
+  border: 2px solid gray;
+  /* display: flex;
+  flex-direction: column; */
+  text-align: center;
+  justify-content: center;
+}
