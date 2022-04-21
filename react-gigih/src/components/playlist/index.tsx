@@ -3,7 +3,17 @@ import {
   ConvertString20,
   ConvertString40,
 } from "../../utils/helper/ConvertString";
-const Playlist = ({ index, handleSelect, playlist, ...item }) => {
+
+import { RootObject } from "../../models";
+
+type PlaylistProps = {
+  index: number;
+  handleSelect: (data: RootObject, uri: string) => void;
+  playlist: Array<RootObject>;
+  data: RootObject;
+};
+
+const Playlist = ({ index, handleSelect, playlist, data }: PlaylistProps) => {
   return (
     <>
       <div className="card-playlist">
@@ -13,22 +23,22 @@ const Playlist = ({ index, handleSelect, playlist, ...item }) => {
         <div>
           <img
             className="img-playlist"
-            src={item.album.images[0].url}
-            alt={item.album.name}
+            src={data.album.images[0].url}
+            alt={data.album.name}
           ></img>
         </div>
         <div className="title-album">
-          <p>{ConvertString40(item.name)}</p>
-          <p>{ConvertString40(item.artists[0].name)}</p>
+          <p>{ConvertString40(data.name)}</p>
+          <p>{ConvertString40(data.artists[0].name)}</p>
         </div>
         <div className="duration">
-          <p>{`${ConvertMin(item.duration_ms)}:${ConvertSec(
-            item.duration_ms
+          <p>{`${ConvertMin(data.duration_ms)}:${ConvertSec(
+            data.duration_ms
           )}`}</p>
         </div>
         <div className="button-playlist">
-          <button onClick={() => handleSelect(item, item.uri)}>
-            {playlist.some((data) => item.id === data.id)
+          <button onClick={() => handleSelect(data, data.uri)}>
+            {playlist.some((item) => data.id === item.id)
               ? "Deselect"
               : "Select"}
           </button>
