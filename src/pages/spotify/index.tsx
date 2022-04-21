@@ -1,7 +1,7 @@
 // import data from "./data";
 import axios from "axios";
 import SearchBar from "../../components/Search";
-import { useState, useEffect, SetStateAction, ChangeEvent } from "react";
+import { useState, useEffect, ChangeEvent } from "react";
 import Playlist from "../../components/playlist";
 import { useSelector, RootStateOrAny } from "react-redux";
 import { Button } from "@mui/material";
@@ -14,7 +14,6 @@ type Form = {
 
 const ListTrack = () => {
   const token = useSelector((state: RootStateOrAny) => state.auth.token);
-  const [theLimit, setTheLimit] = useState("");
 
   const [form, setForm] = useState<Form>({
     name: "",
@@ -41,33 +40,6 @@ const ListTrack = () => {
 
   const handleLoadNewData = (data: number) => {
     setLimit(limit + data);
-  };
-
-  const getData = async () => {
-    await axios
-      .get(
-        "https://api.spotify.com/v1/search?q=" +
-          search +
-          "&type=track&access_token=" +
-          token +
-          "&limit=" +
-          limit
-      )
-      .then((res) => {
-        // console.log("RESPONSE =>", res.data.tracks.items);
-        setData(res.data.tracks.items);
-      })
-      .catch((error) => error.message);
-  };
-
-  const getProfile = () => {
-    axios
-      .get(`https://api.spotify.com/v1/me?access_token=${token}`)
-      .then((res) => {
-        // console.log(res.data);
-        setUser(res.data.display_name);
-        setUserID(res.data.id);
-      });
   };
 
   const addPlaylist = async (data: Form) => {
@@ -98,12 +70,37 @@ const ListTrack = () => {
 
   useEffect(() => {
     if (search !== "") {
+      const getData = async () => {
+        await axios
+          .get(
+            "https://api.spotify.com/v1/search?q=" +
+              search +
+              "&type=track&access_token=" +
+              token +
+              "&limit=" +
+              limit
+          )
+          .then((res) => {
+            // console.log("RESPONSE =>", res.data.tracks.items);
+            setData(res.data.tracks.items);
+          })
+          .catch((error) => error.message);
+      };
       getData();
     } else if (search === "") {
       setData([]);
     }
+    const getProfile = () => {
+      axios
+        .get(`https://api.spotify.com/v1/me?access_token=${token}`)
+        .then((res) => {
+          // console.log(res.data);
+          setUser(res.data.display_name);
+          setUserID(res.data.id);
+        });
+    };
     getProfile();
-  }, [limit, search]);
+  }, [token, limit, search]);
 
   const handleSubmitForm: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
@@ -129,10 +126,6 @@ const ListTrack = () => {
       setPlaylist(newArray);
       setListUri(newUri);
     }
-  };
-
-  const handleTheLimit = (e: ChangeEvent<HTMLSelectElement>) => {
-    setTheLimit(e.target.value);
   };
 
   return (

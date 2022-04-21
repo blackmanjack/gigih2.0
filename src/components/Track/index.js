@@ -1,22 +1,5 @@
 import { Button } from "@mui/material";
 import { ConvertMin, ConvertSec } from "../../utils/helper/ConvertMiliseconds";
-import { ItemTrack } from "../../models";
-
-// interface Playlist {
-//   urlImage: string;
-//   name: string;
-//   artists: string;
-//   duration_ms: string;
-//   album_name: string;
-//   uri: string;
-//   handleSelect: string;
-//   playlist: string;
-// }
-// type Props = {
-//   data: ItemTrack[];
-//   handleSelect: (data: string) => void;
-//   selectedData: string[];
-// };
 
 const Track = ({ handleSelect, playlist, ...item }) => {
   return (

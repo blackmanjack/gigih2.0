@@ -14,7 +14,7 @@ const Loginpage = () => {
     if (token) {
       history.push("/home");
     }
-  }, [token]);
+  }, [history, token]);
 
   const handleLogin = async () => {
     window.location.replace(

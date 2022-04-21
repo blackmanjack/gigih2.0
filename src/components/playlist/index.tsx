@@ -1,8 +1,5 @@
 import { ConvertMin, ConvertSec } from "../../utils/helper/ConvertMiliseconds";
-import {
-  ConvertString20,
-  ConvertString40,
-} from "../../utils/helper/ConvertString";
+import { ConvertString40 } from "../../utils/helper/ConvertString";
 
 import { RootObject } from "../../models";
 

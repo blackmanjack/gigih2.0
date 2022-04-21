@@ -7,23 +7,19 @@ const Home = () => {
   const [data, setData] = useState([]);
   const token = useSelector((state) => state.auth.token);
 
-  const getNewRelease = () => {
-    axios
-      .get(
-        `https://api.spotify.com/v1/browse/new-releases?access_token=${token}`
-      )
-      .then((res) => {
-        // console.log(res.data.albums.items);
-        setData(res.data.albums.items);
-      });
-  };
-
   useEffect(() => {
     if (data.length === 0) {
-      getNewRelease();
+      axios
+        .get(
+          `https://api.spotify.com/v1/browse/new-releases?access_token=${token}`
+        )
+        .then((res) => {
+          // console.log(res.data.albums.items);
+          setData(res.data.albums.items);
+        });
     }
     // console.log(data, "data");
-  }, [data]);
+  }, [data, data.length, token]);
 
   return (
     <>
@@ -35,7 +31,7 @@ const Home = () => {
             {data.map((item) => (
               //grid
               <div key={item.id} className="card-release">
-                <img src={item.images[0].url}></img>
+                <img src={item.images[0].url} alt={item.name}></img>
                 <div className="text-card">
                   <div>
                     <p className="item-name">{ConvertString20(item.name)}</p>

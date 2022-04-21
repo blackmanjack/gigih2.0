@@ -1,4 +1,4 @@
-import { Input, TextField } from "@mui/material";
+import { TextField } from "@mui/material";
 
 const SearchBar = ({ user, query, handleChange }) => {
   return (
