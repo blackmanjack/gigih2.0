@@ -1,35 +1,32 @@
 // import data from "./data";
 import axios from "axios";
-import Track from "../../components/Track";
 import SearchBar from "../../components/Search";
 import { useState, useEffect, SetStateAction, ChangeEvent } from "react";
 import Playlist from "../../components/playlist";
-import { useSelector, useDispatch, RootStateOrAny } from "react-redux";
-import { setToken } from "../../utils/redux/tokenSlice";
-import Filter from "../../components/filter";
-import Loginpage from "../Login";
+import { useSelector, RootStateOrAny } from "react-redux";
 import { Button } from "@mui/material";
+import { RootObject } from "../../models";
 
-interface Playlist {
-  urlImage: string;
+type Form = {
   name: string;
-  artist: string;
-  duration_ms: string;
-  album_name: string;
-  uri: string;
-}
+  description: string;
+};
 
 const ListTrack = () => {
-  const dispatch = useDispatch();
   const token = useSelector((state: RootStateOrAny) => state.auth.token);
-  const [form, setForm] = useState({});
+  const [theLimit, setTheLimit] = useState("");
+
+  const [form, setForm] = useState<Form>({
+    name: "",
+    description: "",
+  });
   const [user, setUser] = useState("");
   const [userID, setUserID] = useState("");
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<RootObject[]>([]);
   const [search, setSearch] = useState("");
   const [limit, setLimit] = useState(10);
-  const [playlist, setPlaylist] = useState([]);
-  const [listUri, setListUri] = useState([]);
+  const [playlist, setPlaylist] = useState<RootObject[]>([]);
+  const [listUri, setListUri] = useState<string[]>([]);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setLimit(10);
@@ -42,36 +39,30 @@ const ListTrack = () => {
     console.log(form, "form");
   };
 
-  // const handleOption = (event: ChangeEvent<HTMLSelectElement>) => {
-  //   console.log("value", event.target.value);
-  //   setLimit(event.target.value);
-  // };
   const handleLoadNewData = (data: number) => {
     setLimit(limit + data);
   };
 
-  const getData = () => {
-    fetch(
-      "https://api.spotify.com/v1/search?q=" +
-        search +
-        "&type=track&access_token=" +
-        token +
-        "&limit=" +
-        limit
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        setData(data.tracks.items);
+  const getData = async () => {
+    await axios
+      .get(
+        "https://api.spotify.com/v1/search?q=" +
+          search +
+          "&type=track&access_token=" +
+          token +
+          "&limit=" +
+          limit
+      )
+      .then((res) => {
+        // console.log("RESPONSE =>", res.data.tracks.items);
+        setData(res.data.tracks.items);
       })
       .catch((error) => error.message);
   };
 
   const getProfile = () => {
     axios
-      .get(`https://api.spotify.com/v1/me?access_token=${token}`, {
-        // headers: { Authorization: `Bearer ${token}` },
-      })
+      .get(`https://api.spotify.com/v1/me?access_token=${token}`)
       .then((res) => {
         // console.log(res.data);
         setUser(res.data.display_name);
@@ -79,7 +70,7 @@ const ListTrack = () => {
       });
   };
 
-  const addPlaylist = async (data: any) => {
+  const addPlaylist = async (data: Form) => {
     await axios
       .post(
         `https://api.spotify.com/v1/users/${userID}/playlists?access_token=${token}`,
@@ -95,7 +86,7 @@ const ListTrack = () => {
       .catch((err) => err.message);
   };
 
-  const addTracktoPlaylist = (data: any) => {
+  const addTracktoPlaylist = (data: RootObject) => {
     axios
       .post(
         `https://api.spotify.com/v1/playlists/${data}/tracks?access_token=${token}`,
@@ -108,24 +99,24 @@ const ListTrack = () => {
   useEffect(() => {
     if (search !== "") {
       getData();
-    } else if (search == "") {
+    } else if (search === "") {
       setData([]);
     }
     getProfile();
   }, [limit, search]);
 
-  const handleSubmitForm = (e: any) => {
+  const handleSubmitForm: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     addPlaylist(form);
   };
 
-  const handleSelect = (data: any, uri: any) => {
+  const handleSelect = (data: RootObject, uri: string) => {
     // console.log(uri, "selected uri");
     //if data in playlist === false
     //add new data to playlist
-    if (playlist.some((item: any) => data.id === item.id) === false) {
-      setListUri((prevUri): any => [...prevUri, uri]);
-      setPlaylist((prevData): any => {
+    if (playlist.some((item: RootObject) => data.id === item.id) === false) {
+      setListUri((prevUri) => [...prevUri, uri]);
+      setPlaylist((prevData) => {
         const newA = [...prevData, data];
         return newA;
       });
@@ -133,11 +124,15 @@ const ListTrack = () => {
     //if data is already in playlist
     //erase data from list
     else {
-      let newArray = playlist.filter((item: any) => item.id !== data.id);
+      let newArray = playlist.filter((item: RootObject) => item.id !== data.id);
       let newUri = listUri.filter((data) => data !== uri);
       setPlaylist(newArray);
       setListUri(newUri);
     }
+  };
+
+  const handleTheLimit = (e: ChangeEvent<HTMLSelectElement>) => {
+    setTheLimit(e.target.value);
   };
 
   return (
@@ -151,7 +146,7 @@ const ListTrack = () => {
             // handleSubmit={handleSubmit}
             handleChange={handleChange}
           />
-
+          {/* <Filter handleTheLimit={handleTheLimit} theLimit={theLimit}></Filter> */}
           <div className="layout playlist">
             <div className="wrapper-content">
               <div className="layout-item">
@@ -180,13 +175,13 @@ const ListTrack = () => {
                 </form>
                 <div className="list-playlist">
                   <h2>Selected Song</h2>
-                  {playlist.map((item: any, index) => (
+                  {playlist?.map((item: RootObject, index: number) => (
                     <Playlist
                       key={item.id}
                       index={index}
                       handleSelect={handleSelect}
                       playlist={playlist}
-                      {...item}
+                      data={item}
                     />
                   ))}
                 </div>
@@ -195,14 +190,14 @@ const ListTrack = () => {
                 <h1>Search result</h1>
                 {/* flexbox */}
                 <div className="list-playlist">
-                  {data.map((item: any, index) => (
+                  {data?.map((item: RootObject, index: number) => (
                     <Playlist
                       key={item.id}
                       index={index}
                       handleSelect={handleSelect}
                       // listUri={listUri}
                       playlist={playlist}
-                      {...item}
+                      data={item}
                     ></Playlist>
                   ))}
                 </div>
