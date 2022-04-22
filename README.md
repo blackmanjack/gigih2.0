@@ -5,16 +5,16 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Fitur yang diimplementasi
 
 - Search Song
-  Dapat mencari lagu
+  - Dapat mencari lagu
 - Select Song
-  Menambahkan lagu untuk memasukkan ke playlist baru
-  Dapat menghapus lagu yang dipilih dari daftar lagu yang akan dimasukkan ke playlist
+  - Menambahkan lagu untuk memasukkan ke playlist baru
+  - Dapat menghapus lagu yang dipilih dari daftar lagu yang akan dimasukkan ke playlist
 - Load more song
-  Dapat melihat lagu yang lainnya
+  - Dapat melihat lagu yang lainnya
 - Menambahkan Playlist
-  Menambahkan playlist baru
+  - Menambahkan playlist baru
 - Melihat Daftar New Release
-  Dapat melihat album/lagu baru
+  - Dapat melihat album/lagu baru
 
 ## Available Scripts
 
