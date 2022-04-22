@@ -16,7 +16,7 @@ const Home = () => {
           `https://api.spotify.com/v1/browse/new-releases?access_token=${token}`
         )
         .then((res) => {
-          console.log("RES====>", res.data.albums.items);
+          // console.log("RES====>", res.data.albums.items);
           setData(res.data.albums.items);
         });
     }

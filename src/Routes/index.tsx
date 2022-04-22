@@ -1,16 +1,16 @@
 import { Route, Link, BrowserRouter as Router } from "react-router-dom";
 import Home from "../pages/Home";
 import ListTrack from "../pages/Playlist";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch, RootStateOrAny } from "react-redux";
 import Loginpage from "../pages/Login";
 import { Switch } from "react-router-dom";
 import { Redirect } from "react-router-dom";
 import { setToken } from "../utils/redux/tokenSlice";
 
 const SwitchRouter = () => {
-  const token = useSelector((state) => state.auth.token);
+  const token = useSelector((state: RootStateOrAny) => state.auth.token);
   const dispatch = useDispatch();
-  console.log(token, "token");
+  // console.log(token, "token");
 
   const PrivateRoute = ({ ...rest }) => {
     if (token === "" || token === undefined) {
@@ -21,7 +21,7 @@ const SwitchRouter = () => {
   };
 
   const handleLogOut = () => {
-    console.log("LogOut");
+    // console.log("LogOut");
     dispatch(setToken(""));
   };
 
@@ -33,8 +33,8 @@ const SwitchRouter = () => {
             <></>
           ) : (
             <>
-              <nav id="navbar" class="">
-                <div class="nav-wrapper">
+              <nav id="navbar">
+                <div className="nav-wrapper">
                   <div className="logo">
                     <img
                       width="160px"
