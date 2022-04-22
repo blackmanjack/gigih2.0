@@ -1,6 +1,6 @@
 import { Route, Link, BrowserRouter as Router } from "react-router-dom";
-import Home from "../pages/home";
-import ListTrack from "../pages/spotify";
+import Home from "../pages/Home";
+import ListTrack from "../pages/Playlist";
 import { useSelector, useDispatch } from "react-redux";
 import Loginpage from "../pages/Login";
 import { Switch } from "react-router-dom";
@@ -25,6 +25,29 @@ const SwitchRouter = () => {
     dispatch(setToken(""));
   };
 
+  // let menuIcon = document.querySelector(".menuIcon");
+  // let nav = document.querySelector(".overlay-menu");
+
+  // menuIcon.addEventListener("click", () => {
+  //   if (nav.style.transform != "translateX(0%)") {
+  //     nav.style.transform = "translateX(0%)";
+  //     nav.style.transition = "transform 0.2s ease-out";
+  //   } else {
+  //     nav.style.transform = "translateX(-100%)";
+  //     nav.style.transition = "transform 0.2s ease-out";
+  //   }
+  // });
+
+  // // Toggle Menu Icon ========================================
+  // let toggleIcon = document.querySelector(".menuIcon");
+
+  // toggleIcon.addEventListener("click", () => {
+  //   if (toggleIcon.className != "menuIcon toggle") {
+  //     toggleIcon.className += " toggle";
+  //   } else {
+  //     toggleIcon.className = "menuIcon";
+  //   }
+  // });
   return (
     <>
       <Router>
@@ -33,19 +56,26 @@ const SwitchRouter = () => {
             <></>
           ) : (
             <>
-              <ul>
-                <li>
-                  <Link to="/" onClick={handleLogOut}>
-                    LogOut
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/home">Home</Link>
-                </li>
-                <li>
-                  <Link to="/playlist">Playlist</Link>
-                </li>
-              </ul>
+              <nav id="navbar" class="">
+                <div class="nav-wrapper">
+                  <div className="logo">
+                    <img width="160px" src="/img/Spotify.png" alt="image" />
+                  </div>
+                  <ul id="menu">
+                    <li>
+                      <Link to="/home">Home</Link>
+                    </li>
+                    <li>
+                      <Link to="/playlist">Playlist</Link>
+                    </li>
+                    <li>
+                      <Link to="/" onClick={handleLogOut}>
+                        LogOut
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+              </nav>
               <hr />
             </>
           )}
