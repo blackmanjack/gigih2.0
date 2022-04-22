@@ -1,6 +1,13 @@
 import { TextField } from "@mui/material";
+import React from "react";
 
-const SearchBar = ({ user, query, handleChange }) => {
+type SearchProps = {
+  user?: string;
+  query: string;
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+};
+
+const SearchBar = ({ user, query, handleChange }: SearchProps) => {
   return (
     <>
       <div className="search">

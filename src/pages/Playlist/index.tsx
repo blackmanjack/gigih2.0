@@ -82,7 +82,7 @@ const ListTrack = () => {
               limit
           )
           .then((res) => {
-            // console.log("RESPONSE =>", res.data.tracks.items);
+            console.log("RESPONSE =>", res.data.tracks.items);
             setData(res.data.tracks.items);
           })
           .catch((error) => error.message);
@@ -170,7 +170,7 @@ const ListTrack = () => {
                 </form>
                 <div className="list-playlist">
                   <Heading3>Selected Song</Heading3>
-                  {playlist?.map((item: RootObject, index: number) => (
+                  {(playlist || []).map((item, index: number) => (
                     <Playlist
                       key={item.id}
                       index={index}
@@ -185,7 +185,7 @@ const ListTrack = () => {
                 <Heading2>Search Result</Heading2>
                 {/* flexbox */}
                 <div className="list-playlist">
-                  {data?.map((item: RootObject, index: number) => (
+                  {(data || []).map((item, index: number) => (
                     <Playlist
                       key={item.id}
                       index={index}

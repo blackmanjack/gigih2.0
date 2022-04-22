@@ -1,11 +1,11 @@
 import { Button } from "@mui/material";
 import { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch, RootStateOrAny } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { setToken } from "../../utils/redux/tokenSlice";
 
 const Loginpage = () => {
-  const token = useSelector((state) => state.auth.token);
+  const token = useSelector((state: RootStateOrAny) => state.auth.token);
   const dispatch = useDispatch();
   // console.log(token, "token");
   const history = useHistory();
