@@ -24,7 +24,7 @@ const Home = () => {
 
   return (
     <>
-      <div className="container">
+      <div className="page-container layout">
         <Heading1>New Release</Heading1>
         {/* <h1 className="title">New Release</h1> */}
 
