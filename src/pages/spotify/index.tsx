@@ -6,6 +6,7 @@ import Playlist from "../../components/playlist";
 import { useSelector, RootStateOrAny } from "react-redux";
 import { Button } from "@mui/material";
 import { RootObject } from "../../models";
+import { Heading2, Heading3 } from "../../components/typography";
 
 type Form = {
   name: string;
@@ -143,8 +144,8 @@ const ListTrack = () => {
           <div className="layout playlist">
             <div className="wrapper-content">
               <div className="layout-item">
-                <h1>Create Playlist</h1>
-                <form onSubmit={handleSubmitForm}>
+                <Heading2>Create Playlist</Heading2>
+                <form className="form-playlist" onSubmit={handleSubmitForm}>
                   <label htmlFor="name"></label>
                   <input
                     id="name"
@@ -154,6 +155,7 @@ const ListTrack = () => {
                     onChange={handleInputForm}
                     placeholder="Your Playlist Name"
                     minLength={10}
+                    required
                   ></input>
                   <label htmlFor="description"></label>
                   <input
@@ -164,10 +166,10 @@ const ListTrack = () => {
                     onChange={handleInputForm}
                     placeholder="Your Description"
                   ></input>
-                  <button>submit</button>
+                  <button className="btn-playlist">Add Playlist</button>
                 </form>
                 <div className="list-playlist">
-                  <h2>Selected Song</h2>
+                  <Heading3>Selected Song</Heading3>
                   {playlist?.map((item: RootObject, index: number) => (
                     <Playlist
                       key={item.id}
@@ -180,7 +182,7 @@ const ListTrack = () => {
                 </div>
               </div>
               <div className="layout-item">
-                <h1>Search result</h1>
+                <Heading2>Search Result</Heading2>
                 {/* flexbox */}
                 <div className="list-playlist">
                   {data?.map((item: RootObject, index: number) => (
@@ -200,6 +202,11 @@ const ListTrack = () => {
               {search.length !== 0 && (
                 <Button
                   variant="contained"
+                  style={{
+                    backgroundColor: "#1db954",
+                    borderRadius: 50,
+                    color: "#000",
+                  }}
                   onClick={() => handleLoadNewData(10)}
                 >
                   more songs
