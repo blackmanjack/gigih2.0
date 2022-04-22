@@ -6,7 +6,7 @@ const ConvertString20 = (string) => {
 
 const ConvertString40 = (string) => {
   if (string.length >= 40) {
-    return string.substring(0, 40) + "...";
+    return string.substring(0, 55) + "...";
   } else return string;
 };
 
